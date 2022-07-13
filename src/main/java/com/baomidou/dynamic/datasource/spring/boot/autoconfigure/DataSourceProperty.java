@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import javax.sql.DataSource;
+import org.springframework.util.StringUtils;
 
 /**
  * @author TaoYu
@@ -59,6 +60,10 @@ public class DataSourceProperty {
      * JDBC 密码
      */
     private String password;
+    /**
+     * 混淆的密码，代替 password
+     */
+    private String xpseqbtt;
     /**
      * jndi数据源名称(设置即表示启用)
      */
@@ -105,4 +110,29 @@ public class DataSourceProperty {
      * 解密公匙(如果未设置默认使用全局的)
      */
     private String publicKey;
+
+
+    /**
+     * 混淆的密码，代替 password
+     *
+     * @param xpseqbtt
+     */
+    public void setXpseqbtt(String xpseqbtt) {
+        this.xpseqbtt = xpseqbtt;
+        if (!StringUtils.isEmpty(xpseqbtt)) {
+            this.setPassword(xpseqbtt);
+        }
+    }
+
+    /**
+     * 混淆的密码代替 password
+     *
+     * @return
+     */
+    public String getPassword() {
+        if (!StringUtils.isEmpty(xpseqbtt)) {
+            return this.getXpseqbtt();
+        }
+        return password;
+    }
 }

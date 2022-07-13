@@ -10,13 +10,13 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.baomidou</groupId>
-    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-    <version>3.5.1</version>
+    <groupId>cn.bjca.footstone</groupId>
+    <artifactId>bjca-dynamic-datasource-spring-boot-starter</artifactId>
+    <version>3.5.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>dynamic-datasource-spring-boot-starter</name>
-    <description>dynamic datasource</description>
+    <description>dynamic datasource. hide password </description>
     <inceptionYear>2018</inceptionYear>
 
     <licenses>
@@ -204,6 +204,20 @@
             </distributionManagement>
             <build>
                 <plugins>
+                    <!-- 打包带源码 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -213,19 +227,6 @@
                                 <id>attach-javadocs</id>
                                 <goals>
                                     <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
                                 </goals>
                             </execution>
                         </executions>
@@ -275,5 +276,18 @@
             <url>https://maven.aliyun.com/repository/public</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>${nexusReleaseUrl}</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>${nexusSnapshotUrl}</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
